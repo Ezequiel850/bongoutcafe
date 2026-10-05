@@ -1,0 +1,6 @@
+{
+  "name": "BON GOÛT café",
+  "description": "Website e Menu Digital do BON GOÛT café. Cafés especiais, sobremesas artesanais, tostas gourmet e bebidas geladas em Maputo com certificação Halal.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
