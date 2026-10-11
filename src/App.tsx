@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { api } from './services/api';
 import { MenuItem, MenuCategory, SiteSettings, CartItem } from './types';
+import {
+  DEFAULT_CATEGORIES,
+  DEFAULT_ITEMS,
+  DEFAULT_SETTINGS,
+} from './data/initialData';
 import { AnnouncementBanner } from './components/AnnouncementBanner';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -15,27 +20,11 @@ import { Footer } from './components/Footer';
 import { AdminDashboard } from './components/AdminDashboard';
 import { Loader2 } from 'lucide-react';
 
-const FALLBACK_SETTINGS: SiteSettings = {
-  businessName: 'BON GOÛT café',
-  tagline: 'Eat, Sip, Gather - Uma Experiência Gastronómica Inesquecível',
-  phone: '+258 84 784 9629',
-  whatsappRaw: '258847849629',
-  whatsappLink: 'https://wa.me/message/M7A56MF7GPR',
-  operatingHours: 'Terça-Feira a Domingo: 08:00 - 19:00 (Segunda-Feira: Encerrado)',
-  address: 'Maputo, Moçambique',
-  mapsUrl: 'https://maps.app.goo.gl/8bLVEGu2MqVgV3Hp7',
-  announcement: '☕ Bem-vindo ao BON GOÛT café! Experimente o novo Dubai Chocolate Latte e o Strawberry Matcha Latte. 100% Halal Certificado.',
-  announcementActive: true,
-  deliveryAvailable: true,
-  deliveryNotice: 'Entregas rápidas disponíveis em toda a grande Maputo via WhatsApp ou Telefone.',
-  heroVideoUrl: 'https://res.cloudinary.com/c7zjsyeu/video/upload/v1790963159/gemini_generated_video_90f51a7f.mp4'
-};
-
 export default function App() {
-  const [categories, setCategories] = useState<MenuCategory[]>([]);
-  const [items, setItems] = useState<MenuItem[]>([]);
-  const [settings, setSettings] = useState<SiteSettings>(FALLBACK_SETTINGS);
-  const [isLoading, setIsLoading] = useState(true);
+  const [categories, setCategories] = useState<MenuCategory[]>(DEFAULT_CATEGORIES);
+  const [items, setItems] = useState<MenuItem[]>(DEFAULT_ITEMS);
+  const [settings, setSettings] = useState<SiteSettings>(DEFAULT_SETTINGS);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Modals & Panels State
   const [selectedItemForModal, setSelectedItemForModal] = useState<MenuItem | null>(null);

@@ -59,6 +59,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
   // Settings form state
   const [localSettings, setLocalSettings] = useState<SiteSettings>(settings);
+  const [newAdminPassword, setNewAdminPassword] = useState('');
   const [savingSettings, setSavingSettings] = useState(false);
   const [settingsSuccess, setSettingsSuccess] = useState(false);
 
@@ -158,6 +159,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     setSavingSettings(true);
     setSettingsSuccess(false);
     try {
+      if (newAdminPassword.trim()) {
+        localStorage.setItem('bon_gout_admin_password', newAdminPassword.trim());
+      }
       await api.updateSettings(localSettings);
       setSettingsSuccess(true);
       onSettingsUpdated();
@@ -878,6 +882,22 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       onChange={(e) => setLocalSettings({ ...localSettings, announcement: e.target.value })}
                       className="w-full px-3 py-2 text-xs bg-[#FAF8F5] border border-[#E3D9C9] rounded-lg"
                     />
+                  </div>
+
+                  <div className="pt-3 border-t border-[#F0EAE1]">
+                    <label className="block text-xs uppercase font-bold text-[#8C7B71] mb-1">
+                      Alterar Palavra-Passe do Painel Admin
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Deixe em branco para manter ou digite nova password (padrão: admin)"
+                      value={newAdminPassword}
+                      onChange={(e) => setNewAdminPassword(e.target.value)}
+                      className="w-full px-3 py-2 text-xs bg-[#FAF8F5] border border-[#E3D9C9] rounded-lg mb-1"
+                    />
+                    <p className="text-[10px] text-[#8C7B71]">
+                      Códigos aceites por padrão: <code className="bg-[#EFE8DC] px-1 py-0.2 rounded font-bold text-[#2B1B17]">admin</code>, <code className="bg-[#EFE8DC] px-1 py-0.2 rounded font-bold text-[#2B1B17]">bongoût2025</code> ou <code className="bg-[#EFE8DC] px-1 py-0.2 rounded font-bold text-[#2B1B17]">admin123</code>
+                    </p>
                   </div>
 
                   <div className="pt-4 flex items-center justify-end gap-3">
